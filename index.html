@@ -1,0 +1,104 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Site</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Page-specific CSS -->
+    <style>
+        /* ---------- Home Page Styles ---------- */
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #ffcc33, #ff9966);
+            color: #fff;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+
+        .hero button {
+            background-color: #fff;
+            color: #ff6600;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #ffcc33;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Intro Section */
+        .intro {
+            background-color: #fff7e6;
+            color: #333;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 3px solid #ffcc33;
+        }
+
+        .intro h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+
+        .intro p {
+            font-size: 1.1em;
+            line-height: 1.6em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h2>Welcome to My Website</h2>
+        <p>Your one stop platform for learning, creativity, and innovation.</p>
+        <button onclick="window.location.href='about.html'">Learn More</button>
+    </section>
+
+    <section class="intro">
+        <h2>What I do</h2>
+        <p>We help students, professionals, and creators explore opportunities, build projects, and connect ideas with purpose.</p>
+    </section>
+
+    <footer>
+        <p>© 2025 My Website | Designed by Cullens'</p>
+    </footer>
+</body>
+</html>

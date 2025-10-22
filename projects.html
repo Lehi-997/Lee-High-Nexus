@@ -1,0 +1,138 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - My Website</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Page-specific CSS -->
+  <style>
+    /* ---------- Projects Page Styles ---------- */
+
+    body {
+      background-color: #1a1a2e; /* Dark blue/indigo for a modern tech vibe */
+      color: #e0e0e0; /* Light gray text */
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #162447;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    nav ul li a {
+      color: #e0e0e0;
+      font-weight: bold;
+      font-size: 1em;
+    }
+
+    nav ul li a.active {
+      color: #f76c6c; /* Highlight active page */
+      text-decoration: underline;
+    }
+
+    nav ul li a:hover {
+      color: #f76c6c;
+    }
+
+    /* Projects Section */
+    .projects {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .projects h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #f76c6c;
+    }
+
+    .projects p {
+      font-size: 1.2em;
+      margin-bottom: 50px;
+    }
+
+    .project-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      text-align: left;
+    }
+
+    .project {
+      background-color: #0f3460; /* Darker card background */
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project h2 {
+      color: #f76c6c;
+      margin-bottom: 15px;
+    }
+
+    .project p {
+      font-size: 1em;
+      line-height: 1.6em;
+      color: #e0e0e0;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #162447;
+      color: #e0e0e0;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 50px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="projects">
+    <h1>My Projects</h1>
+    <p>Here are a few projects I’ve been working on recently:</p>
+
+    <div class="project-list">
+      <div class="project">
+        <h2>🎓 Student Portal</h2>
+        <p>A simple web system that helps students find and apply for courses — inspired by KUCCPS. Built with HTML, CSS, and JavaScript.</p>
+      </div>
+
+      <div class="project">
+        <h2>🌍 Career Guide Site</h2>
+        <p>An information site that guides high school graduates through available local and international opportunities.</p>
+      </div>
+
+      <div class="project">
+        <h2>🧠 E-learning Platform</h2>
+        <p>A mock-up for an online classroom that connects tutors and learners virtually for live sessions and notes sharing.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 My Website | All rights reserved</p>
+  </footer>
+</body>
+</html>

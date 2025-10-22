@@ -1,0 +1,134 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Page-specific CSS -->
+  <style>
+    /* ---------- Contact Page Styles ---------- */
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.6)
+      ), url('background.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #f0f0f0;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    nav {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 12px 0;
+      text-align: center;
+    }
+
+    nav ul li a {
+      color: #f0f0f0;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05em;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc33; /* Matches Home highlight for cohesion */
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 2.8em;
+      color: #ffcc33;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+
+    form {
+      max-width: 500px;
+      margin: 40px auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 1em;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 1em;
+    }
+
+    input:focus, textarea:focus {
+      box-shadow: 0 0 5px 2px #ffcc33;
+    }
+
+    button {
+      background-color: #ffcc33;
+      color: #000;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: transform 0.2s, background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff9900;
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <h1>Contact Me</h1>
+
+  <form action="https://formspree.io/f/mvgwjqlw" method="POST">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Your Message:</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  <script>
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function() {
+      alert("Thank you! Your message has been sent successfully 🎉");
+    });
+  </script>
+</body>
+</html>

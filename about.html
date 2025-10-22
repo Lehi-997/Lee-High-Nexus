@@ -1,0 +1,99 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - My Website</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Page-specific CSS -->
+  <style>
+    /* ---------- About Page Styles ---------- */
+
+    body {
+      background-color: #e0f7fa; /* Soft cyan background for a calm vibe */
+      color: #004d40; /* Deep teal for text */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .about {
+      text-align: center;
+      padding: 80px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #00796b; /* Slightly darker teal for heading */
+    }
+
+    .about img {
+      border-radius: 50%;
+      border: 4px solid #00796b;
+      margin: 20px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .about p {
+      font-size: 1.2em;
+      line-height: 1.8em;
+      margin-bottom: 20px;
+    }
+
+    /* Navbar override for About page */
+    nav {
+      background-color: #004d40;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    nav ul li a {
+      color: #e0f7fa; /* Light text for navbar links */
+      font-weight: bold;
+      font-size: 1em;
+    }
+
+    nav ul li a.active {
+      text-decoration: underline;
+      color: #ffcc33; /* Highlight active page */
+    }
+
+    nav ul li a:hover {
+      color: #ffcc33;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #004d40;
+      color: #e0f7fa;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 50px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="about">
+    <h1>About Me</h1>
+    <img src="me.jpg" alt="My Photo" width="200">
+    <p>Hi there! 👋 My name is Lehi Cullens. I'm passionate about coding, learning, and building creative digital tools that make life easier for students and young professionals.</p>
+    <p>This website is where I share my projects, ideas, and tutorials — from beginner lessons to real-world applications like student placement systems and academic guidance tools.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 My Website | All rights reserved</p>
+  </footer>
+</body>
+</html>
