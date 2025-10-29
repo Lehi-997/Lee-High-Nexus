@@ -7,25 +7,38 @@
     </div>
   <% } %>
 
-  <h1>About Lee High Nexus</h1>
-  <img src="/images/logo.png" alt="LH Nexus Logo" class="logo-img">
+  <div class="about-container">
+    <h1 class="about-title">About Lee High Nexus</h1>
 
-  <p>
-    Lee High Nexus is a youth empowerment organization connecting students through <strong>arts, academics, burudani, and events</strong>. We provide a platform for students to express their creativity, develop leadership skills, and collaborate with like-minded peers.
-  </p>
+    <div class="about-logo">
+      <img src="/images/logo.png" alt="LH Nexus Logo" class="logo-img">
+    </div>
 
-  <p>
-    Our mission is to inspire young people to realize their full potential through mentorship, collaborative projects, and media opportunities, empowering them to shine both on stage and in their communities.
-  </p>
+    <div class="about-text">
+      <p>
+        <strong>Lee High Nexus</strong> is a youth empowerment organization connecting students through
+        <span class="highlight">arts</span>, 
+        <span class="highlight">academics</span>, 
+        <span class="highlight">burudani</span>, and 
+        <span class="highlight">events</span>.  
+        We provide a platform for students to express their creativity, develop leadership skills, and collaborate with like-minded peers.
+      </p>
 
-  <div class="bottom-btns">
-    <% if (currentUser) { %>
-      <a href="/logout" class="cta-btn logout-btn">Logout</a>
-    <% } else { %>
-      <a href="/login" class="cta-btn">Sign In</a>
-      <a href="/login?show=signup" class="cta-btn">Sign Up</a>
-    <% } %>
+      <p>
+        Our mission is to inspire young people to realize their full potential through mentorship, collaborative projects, and media opportunities — empowering them to shine both on stage and in their communities.
+      </p>
+    </div>
+
+    <div class="bottom-btns">
+      <% if (currentUser) { %>
+        <a href="/logout" class="cta-btn logout-btn">Logout</a>
+      <% } else { %>
+        <a href="/login" class="cta-btn">Sign In</a>
+        <a href="/login?show=signup" class="cta-btn">Sign Up</a>
+      <% } %>
+    </div>
   </div>
 </section>
 
 <%- include('partials/footer') %>
+
