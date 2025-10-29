@@ -1,0 +1,82 @@
+<%- include('partials/header', { 
+  title: 'Projects - Lee High Nexus', 
+  page: 'projects', 
+  currentUser: currentUser, 
+  userName: currentUserName 
+}) %>
+
+<section class="projects-section">
+
+  <% if (currentUser) { %>
+    <div class="greeting-banner">
+      Welcome back, <%= currentUserName.split(' ')[0] %> 👋🏽
+      <% if (currentUser.role === 'admin') { %>
+        <p class="admin-link">
+          You’re logged in as <b>Admin</b>. 
+          <a href="/admin/dashboard">Go to Dashboard</a>
+        </p>
+      <% } else { %>
+        <p class="normal-link">
+          Glad to have you on board. Choose a project below to get involved.
+        </p>
+      <% } %>
+    </div>
+  <% } else { %>
+    <h2 class="projects-title">Our Projects</h2>
+  <% } %>
+
+  <!-- Arts -->
+  <div class="project-card">
+    <h2>Arts</h2>
+    <p>
+      From films, theatre, poetry, open mics, and storytelling — 
+      a creative playground for young talent. Launching soon!
+    </p>
+    <div class="project-cta">
+      <% if (!currentUser) { %>
+        <a href="/login?next=/projects" class="cta-btn">Login / Sign Up to Join</a>
+      <% } else { %>
+        <a href="/projects/arts" class="cta-btn">View Project</a>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Academics -->
+  <div class="project-card">
+    <h2>Academics</h2>
+    <p>
+      Mentorship programs, study sessions, and academic networking opportunities 
+      to help you excel.
+    </p>
+    <div class="project-cta">
+      <% if (!currentUser) { %>
+        <a href="/login?next=/projects" class="cta-btn">Login / Sign Up to Join</a>
+      <% } else { %>
+        <a href="/projects/academics" class="cta-btn">Visit Academics Site</a>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Burudani & Events -->
+  <div class="project-card">
+    <h2>Burudani & Events</h2>
+    <p>
+      Trips, hikes, hangouts, games, community visits, and mentorship programs. Launching soon!
+    </p>
+    <div class="project-cta">
+      <% if (!currentUser) { %>
+        <a href="/login?next=/projects" class="cta-btn">Login / Sign Up to Join</a>
+      <% } else { %>
+        <a href="/projects/burudani" class="cta-btn">View Project</a>
+      <% } %>
+    </div>
+  </div>
+
+  <% if (currentUser) { %>
+    <a href="/logout" class="cta-btn logout-bottom-right">Logout</a>
+  <% } %>
+
+</section>
+
+<%- include('partials/footer') %>
+

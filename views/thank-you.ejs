@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f4f6f8;
+      text-align: center;
+      padding: 60px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 12px 25px;
+      background: #007b5e;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Thank You!</h1>
+
+    <% if (typeof email !== "undefined" && email) { %>
+      <p>We’ve sent a verification link to <b><%= email %></b>.</p>
+      <p>Please verify your email before logging in.</p>
+      <button id="loginBtn" disabled>Go to Login</button>
+    <% } else { %>
+      <p>Your form has been submitted successfully. Thank you for joining!</p>
+      <a href="/"><button>Go Home</button></a>
+    <% } %>
+  </div>
+
+  <% if (typeof email !== "undefined" && email) { %>
+  <script>
+    const email = "<%= email %>";
+    const loginBtn = document.getElementById("loginBtn");
+
+    async function checkVerification() {
+      try {
+        const res = await fetch(`/check-verification?email=${email}`);
+        const data = await res.json();
+        if (data.verified) {
+          loginBtn.disabled = false;
+          loginBtn.textContent = "Go to Login ✅";
+          loginBtn.onclick = () => (window.location.href = "/login");
+        } else {
+          setTimeout(checkVerification, 5000);
+        }
+      } catch (err) {
+        console.error("Verification check failed:", err);
+      }
+    }
+    checkVerification();
+  </script>
+  <% } %>
+</body>
+</html>
+

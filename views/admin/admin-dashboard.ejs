@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #007b5e;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h2 {
+      margin: 0;
+      font-weight: 600;
+    }
+    header a {
+      color: #fff;
+      text-decoration: none;
+      background: #005f47;
+      padding: 6px 14px;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    header a:hover {
+      background: #004c38;
+    }
+    main {
+      padding: 20px;
+    }
+    h3 {
+      color: #007b5e;
+      border-bottom: 2px solid #007b5e;
+      padding-bottom: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      background: white;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Admin Dashboard</h2>
+    <a href="/admin/logout">Logout</a>
+  </header>
+
+  <main>
+    <section>
+      <h3>Registered Users</h3>
+      <% if (users && users.length > 0) { %>
+        <table>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Region</th>
+            <th>City</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th>Verified</th>
+          </tr>
+          <% users.forEach(user => { %>
+            <tr>
+              <td><%= user.fullname %></td>
+              <td><%= user.email %></td>
+              <td><%= user.phone || '-' %></td>
+              <td><%= user.region || '-' %></td>
+              <td><%= user.city || '-' %></td>
+              <td><%= user.age || '-' %></td>
+              <td><%= user.role || 'user' %></td>
+              <td><%= user.isVerified ? "✅ Yes" : "❌ No" %></td>
+            </tr>
+          <% }) %>
+        </table>
+      <% } else { %>
+        <p>No registered users yet.</p>
+      <% } %>
+    </section>
+
+    <section>
+      <h3>Join Requests / Members</h3>
+      <% if (members && members.length > 0) { %>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Message</th>
+          </tr>
+          <% members.forEach(member => { %>
+            <tr>
+              <td><%= member.name %></td>
+              <td><%= member.email %></td>
+              <td><%= member.phone %></td>
+              <td><%= member.message %></td>
+            </tr>
+          <% }) %>
+        </table>
+      <% } else { %>
+        <p>No join requests yet.</p>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

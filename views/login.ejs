@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Sign Up | Lee High Nexus</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="flip-card" id="flipCard">
+
+      <!-- FRONT SIDE (LOGIN) -->
+      <div class="side front">
+        <div class="left">
+          <h2>Welcome Back!</h2>
+          <p>Sign in to continue exploring Lee High Nexus.</p>
+        </div>
+
+        <div class="right">
+          <h2>Login</h2>
+          <% if (error) { %>
+            <p style="color:red;"><%= error %></p>
+          <% } %>
+          <% if (message) { %>
+            <p style="color:green;"><%= message %></p>
+          <% } %>
+          <form id="loginForm" action="/login" method="POST">
+            <input type="email" name="email" placeholder="Email Address" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <!-- include next as hidden input -->
+            <input type="hidden" name="next" value="<%= next || '/projects' %>">
+            <button type="submit">Login</button>
+          </form>
+
+          <p style="margin-top: 15px;">Don’t have an account?</p>
+          <button id="showSignup">Sign Up</button>
+        </div>
+      </div>
+
+      <!-- BACK SIDE (SIGN-UP) -->
+      <div class="side back">
+        <div class="left" style="background:#2575fc; color:white;">
+          <h2>Already a Member?</h2>
+          <p>Click below to go back to Login.</p>
+          <button id="showLogin">Login</button>
+        </div>
+
+        <div class="right" style="background:#fff; color:#000;">
+          <h2>Create Account</h2>
+          <% if (error) { %>
+            <p style="color:red;"><%= error %></p>
+          <% } %>
+          <% if (message) { %>
+            <p style="color:green;"><%= message %></p>
+          <% } %>
+          <form id="signupForm" action="/signup" method="POST">
+            <input type="text" name="fullname" placeholder="Full Names" required />
+            <input type="number" name="age" placeholder="Age" required min="10" max="100" />
+            <input type="text" name="city" placeholder="City" required />
+            <input type="text" name="region" placeholder="Region" required />
+            <input type="email" name="email" placeholder="Email Address" required />
+            <input type="tel" name="phone" placeholder="Phone Number" required />
+            <input type="password" name="password" placeholder="Enter Password" required />
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+            <input type="hidden" name="next" value="<%= next || '/projects' %>">
+            <button type="submit">Create Account</button>
+
+            <p style="margin-top:10px;font-size:0.9em;color:#555;">
+              You’ll receive a verification link in your email to activate your account.
+            </p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Flip animation logic -->
+  <script>
+    const flipCard = document.getElementById("flipCard");
+    const showSignup = document.getElementById("showSignup");
+    const showLogin = document.getElementById("showLogin");
+
+    showSignup.addEventListener("click", () => {
+      flipCard.classList.add("flipped");
+    });
+
+    showLogin.addEventListener("click", () => {
+      flipCard.classList.remove("flipped");
+    });
+  </script>
+</body>
+</html>

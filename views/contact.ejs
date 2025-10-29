@@ -1,0 +1,21 @@
+<%- include('partials/header', { title: 'Contact - Lee High Nexus', page: 'contact' }) %>
+
+<section class="contact-section">
+  <h1>Contact Us</h1>
+  <p>Have questions or want to get in touch? Send us a message below!</p>
+
+  <form action="https://formspree.io/f/mvgwjqlw" method="POST">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Your Message:</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit" class="cta-btn">Send Message</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

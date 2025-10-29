@@ -1,0 +1,44 @@
+<div class="side back">
+  <div class="left">
+    <h2>Already a Member?</h2>
+    <p>Click below to go back to Login.</p>
+    <button id="showLogin" type="button">Login</button>
+  </div>
+
+  <div class="right">
+    <h2>Sign Up</h2>
+    <form id="signupForm" method="POST" action="/signup">
+      <input type="text" name="fullname" placeholder="Full Names" required />
+      <input type="number" name="age" placeholder="Age" required min="10" max="100" />
+      <input type="text" name="city" placeholder="City" required />
+      <input type="text" name="region" placeholder="Region" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="tel" name="phone" placeholder="Phone Number" required pattern="[0-9]{10}" />
+      <input type="password" id="password" name="password" placeholder="Enter Password" required />
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required />
+      
+      <!-- Optional hidden field to redirect after signup -->
+      <input type="hidden" name="next" value="/projects" />
+
+      <button type="submit">Create Account</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Client-side confirm password check
+  const form = document.getElementById('signupForm');
+  form.addEventListener('submit', (e) => {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    if (password !== confirmPassword) {
+      e.preventDefault();
+      alert('Passwords do not match!');
+    }
+  });
+
+  // Example: redirect to login button
+  document.getElementById('showLogin').addEventListener('click', () => {
+    window.location.href = '/login';
+  });
+</script>

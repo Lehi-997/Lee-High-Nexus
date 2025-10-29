@@ -1,0 +1,31 @@
+<%- include('partials/header', { title: 'About - Lee High Nexus', page: 'about', currentUser: currentUser, userName: currentUserName }) %>
+
+<section class="about">
+  <% if (currentUser) { %>
+    <div class="greeting-banner">
+      Welcome back, <%= currentUserName.split(' ')[0] %> 👋🏽
+    </div>
+  <% } %>
+
+  <h1>About Lee High Nexus</h1>
+  <img src="/images/logo.png" alt="LH Nexus Logo" class="logo-img">
+
+  <p>
+    Lee High Nexus is a youth empowerment organization connecting students through <strong>arts, academics, burudani, and events</strong>. We provide a platform for students to express their creativity, develop leadership skills, and collaborate with like-minded peers.
+  </p>
+
+  <p>
+    Our mission is to inspire young people to realize their full potential through mentorship, collaborative projects, and media opportunities, empowering them to shine both on stage and in their communities.
+  </p>
+
+  <div class="bottom-btns">
+    <% if (currentUser) { %>
+      <a href="/logout" class="cta-btn logout-btn">Logout</a>
+    <% } else { %>
+      <a href="/login" class="cta-btn">Sign In</a>
+      <a href="/login?show=signup" class="cta-btn">Sign Up</a>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

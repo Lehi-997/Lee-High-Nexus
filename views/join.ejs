@@ -1,0 +1,17 @@
+<%- include('partials/header', { title: title, page: 'join' }) %>
+
+<section class="form-section">
+  <h1>Join the Nexus Movement</h1>
+  <p>Be part of a growing community empowering youth through Arts, Academics, Burudani, and Events.</p>
+
+  <form action="/join" method="POST" class="join-form">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <input type="text" name="phone" placeholder="Phone Number">
+    <textarea name="message" placeholder="Your message or interest area..." rows="4"></textarea>
+    <button type="submit" class="cta-btn">Join Now</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>
+

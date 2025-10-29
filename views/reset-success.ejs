@@ -1,0 +1,57 @@
+<!-- views/reset-success.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .success-container {
+      background: #fff;
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    h2 {
+      color: #222;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+    a {
+      color: #fff;
+      background: #007bff;
+      padding: 10px 16px;
+      text-decoration: none;
+      border-radius: 8px;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+    a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="success-container">
+    <h2>Password Reset Successful</h2>
+    <p>Your password has been updated successfully.</p>
+    <a href="/login">Go to Login</a>
+  </div>
+</body>
+</html>

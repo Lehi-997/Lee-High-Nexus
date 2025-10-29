@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify Your Email</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    p {
+      color: #555;
+      margin-bottom: 30px;
+    }
+    button {
+      padding: 12px 24px;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #3730a3;
+    }
+    .message {
+      margin-top: 20px;
+      color: green;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Almost There!</h1>
+    <p>We’ve sent a verification link to <strong><%= email %></strong>.<br> Please check your inbox and click the link.</p>
+    <button id="check-btn">Check Verification</button>
+    <div class="message" id="status-msg"></div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('check-btn');
+    const statusMsg = document.getElementById('status-msg');
+
+    btn.addEventListener('click', async () => {
+      statusMsg.textContent = 'Checking...';
+      try {
+        const res = await fetch('/auth/check-verification?email=<%= email %>');
+        const data = await res.json();
+        if(data.verified) {
+          statusMsg.textContent = 'Your email has been verified! Redirecting...';
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 1500);
+        } else {
+          statusMsg.textContent = 'Not verified yet. Please check your inbox.';
+        }
+      } catch (err) {
+        statusMsg.textContent = 'Error checking verification. Try again.';
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

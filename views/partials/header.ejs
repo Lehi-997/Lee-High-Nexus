@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/projects.css">
+  <script src="/js/script.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="/" style="text-decoration:none; color:#ffcc33; font-weight:bold; font-size:1.5em;">Lee High Nexus</a>
+    </div>
+    <nav id="navbar">
+      <ul class="nav-links">
+        <li><a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a></li>
+        <li><a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About</a></li>
+        <li><a href="/projects" class="<%= page === 'projects' ? 'active' : '' %>">Projects</a></li>
+        <li><a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a></li>
+      </ul>
+
+      <!-- Removed auth buttons from header -->
+
+      <div class="menu-toggle" id="menu-toggle">
+        ☰
+      </div>
+    </nav>
+  </header>
