@@ -15,7 +15,7 @@ function requireAdmin(req, res, next) {
 
 /* ---------- Admin Login Page ---------- */
 router.get('/login', (req, res) => {
-  res.render('admin/admin-login', {
+  res.render('admin/admin-login', {  
     title: 'Admin Login - Lee High Nexus',
     page: 'admin-login',
     error: null,
