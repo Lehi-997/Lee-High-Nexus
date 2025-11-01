@@ -4,28 +4,34 @@ const router = express.Router();
 const crypto = require('crypto');
 const User = require('../models/User');
 const nodemailer = require('nodemailer');
-const brevoTransport = require('nodemailer-brevo-transport');
 
 /* ---------- ENV VARIABLES ---------- */
 const {
-  BREVO_API_KEY,
-  SENDER_EMAIL,
+  SMTP_HOST,
+  SMTP_PORT,
+  SMTP_USER,
+  SMTP_PASS,
+  EMAIL_FROM,
   BASE_URL,
   ADMIN_EMAIL
 } = process.env;
 
-/* ---------- EMAIL TRANSPORT (BREVO) ---------- */
-const transporter = nodemailer.createTransport(
-  brevoTransport({
-    apiKey: BREVO_API_KEY
-  })
-);
+/* ---------- EMAIL TRANSPORT (SMTP) ---------- */
+const transporter = nodemailer.createTransport({
+  host: SMTP_HOST,
+  port: parseInt(SMTP_PORT, 10),
+  secure: SMTP_PORT == 465, // true for 465, false for 587
+  auth: {
+    user: SMTP_USER,
+    pass: SMTP_PASS
+  }
+});
 
 /* ---------- SEND EMAIL UTILITY ---------- */
 async function sendEmail(to, subject, html) {
   try {
     await transporter.sendMail({
-      from: SENDER_EMAIL,
+      from: EMAIL_FROM,
       to,
       subject,
       html
@@ -412,4 +418,3 @@ router.post('/reset-password/:token', async (req, res) => {
 });
 
 module.exports = router;
-
