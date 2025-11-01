@@ -1,0 +1,12 @@
+<%- include('partials/header', { title: 'Resend Verification' }) %>
+
+<section class="resend-verification">
+  <h1>Email Not Verified</h1>
+  <p>Your account has not been verified yet.</p>
+  <form action="/resend-verification" method="get">
+    <input type="hidden" name="email" value="<%= email %>">
+    <button type="submit">Resend Verification Email</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

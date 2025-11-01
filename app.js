@@ -15,6 +15,8 @@ const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
 const forgotPasswordRouter = require('./routes/forgotPassword');
 const projectsRouter = require('./routes/projects');
+const resendVerificationRouter = require('./routes/resendVerification');
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -78,6 +80,7 @@ app.use('/', authRouter);
 app.use('/admin', adminRouter);
 app.use('/', forgotPasswordRouter);
 app.use('/projects', projectsRouter);
+app.use('/resend-verification', resendVerificationRouter);
 
 /* ---------- Auth Middleware ---------- */
 function requireAuth(req, res, next) {

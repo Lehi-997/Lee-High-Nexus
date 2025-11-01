@@ -66,7 +66,6 @@ router.post('/signup', async (req, res) => {
     const { fullname, email, password, confirmPassword, phone, region, city, age, next } = req.body;
     const redirectTo = next || '/projects';
 
-    // Validation
     if (!fullname || !email || !password || !confirmPassword) {
       return res.render('login', {
         title: 'Sign Up',
@@ -87,7 +86,6 @@ router.post('/signup', async (req, res) => {
       });
     }
 
-    // Check if email already exists
     const existing = await User.findOne({ email });
     if (existing) {
       console.log(`⚠️ Duplicate signup attempt for: ${email}`);
@@ -100,7 +98,6 @@ router.post('/signup', async (req, res) => {
       });
     }
 
-    // Create user
     const user = new User({
       fullname,
       email,
@@ -114,7 +111,6 @@ router.post('/signup', async (req, res) => {
 
     await user.setPassword(password);
 
-    // Auto-verify admin
     if (email === (ADMIN_EMAIL || 'admin@leehighnexus.com')) {
       user.isVerified = true;
       user.role = 'admin';
@@ -122,13 +118,11 @@ router.post('/signup', async (req, res) => {
 
     await user.save();
 
-    // Send verification email if not verified
     if (!user.isVerified) {
       await sendVerificationEmail(user, req);
       return res.redirect(`/thank-you?email=${encodeURIComponent(user.email)}`);
     }
 
-    // Auto-login admin
     req.session.userId = user._id;
     req.session.userName = user.fullname;
     res.redirect(redirectTo);
@@ -175,6 +169,49 @@ router.get('/verify-email', async (req, res) => {
   } catch (err) {
     console.error('❌ Verification error:', err);
     res.status(500).send('Something went wrong during verification.');
+  }
+});
+
+/* ---------- NEW: RESEND VERIFICATION EMAIL ---------- */
+router.post('/resend-verification', async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.render('forgot-password', {
+        title: 'Forgot Password',
+        error: 'No account found with that email.',
+        message: null
+      });
+    }
+
+    if (user.isVerified) {
+      return res.render('forgot-password', {
+        title: 'Forgot Password',
+        message: 'Your account is already verified. You can reset your password normally.',
+        error: null
+      });
+    }
+
+    user.verificationToken = crypto.randomBytes(32).toString('hex');
+    user.verificationTokenExpires = Date.now() + 15 * 60 * 1000;
+    await user.save();
+
+    await sendVerificationEmail(user, req);
+
+    return res.render('forgot-password', {
+      title: 'Forgot Password',
+      message: 'Verification link resent! Please check your email.',
+      error: null
+    });
+  } catch (err) {
+    console.error('❌ Resend Verification error:', err);
+    res.render('forgot-password', {
+      title: 'Forgot Password',
+      error: 'Something went wrong while resending verification link.',
+      message: null
+    });
   }
 });
 
@@ -258,6 +295,118 @@ router.get('/check-verification', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
+  }
+});
+
+/* ---------- FORGOT PASSWORD ---------- */
+router.get('/forgot-password', (req, res) => {
+  res.render('forgot-password', { title: 'Forgot Password', error: null, message: null });
+});
+
+router.post('/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.render('forgot-password', {
+        title: 'Forgot Password',
+        error: 'No account found with that email.',
+        message: null
+      });
+    }
+
+    if (!user.isVerified) {
+      return res.render('forgot-password', {
+        title: 'Forgot Password',
+        error: 'Please verify your email first.',
+        message: null,
+        showResend: true,
+        email
+      });
+    }
+
+    const token = crypto.randomBytes(32).toString('hex');
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
+    await user.save();
+
+    const resetUrl = `${BASE_URL || `http://${req.headers.host}`}/reset-password/${token}`;
+    const html = `
+      <p>Hi ${user.fullname?.split(' ')[0] || 'there'},</p>
+      <p>You requested a password reset. Click below to set a new password:</p>
+      <p><a href="${resetUrl}" style="background:#007bff;color:#fff;padding:10px 20px;text-decoration:none;border-radius:5px;">Reset Password</a></p>
+      <p>This link expires in 15 minutes.</p>
+    `;
+
+    await sendEmail(user.email, 'Reset your password', html);
+
+    res.render('forgot-password', {
+      title: 'Forgot Password',
+      message: 'Password reset link sent! Please check your email.',
+      error: null
+    });
+  } catch (err) {
+    console.error('❌ Forgot Password error:', err);
+    res.render('forgot-password', {
+      title: 'Forgot Password',
+      error: 'Something went wrong. Try again.',
+      message: null
+    });
+  }
+});
+
+/* ---------- RESET PASSWORD ---------- */
+router.get('/reset-password/:token', async (req, res) => {
+  try {
+    const { token } = req.params;
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      return res.render('message', { msg: 'Invalid or expired reset link.' });
+    }
+
+    res.render('reset-password', { title: 'Reset Password', token, error: null });
+  } catch (err) {
+    console.error('❌ Reset Password (GET) error:', err);
+    res.render('message', { msg: 'Something went wrong.' });
+  }
+});
+
+router.post('/reset-password/:token', async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password, confirmPassword } = req.body;
+
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      return res.render('message', { msg: 'Invalid or expired reset link.' });
+    }
+
+    if (password !== confirmPassword) {
+      return res.render('reset-password', {
+        title: 'Reset Password',
+        token,
+        error: 'Passwords do not match.'
+      });
+    }
+
+    await user.setPassword(password);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.render('message', { msg: 'Password successfully reset! You can now log in.' });
+  } catch (err) {
+    console.error('❌ Reset Password (POST) error:', err);
+    res.render('message', { msg: 'Something went wrong. Try again.' });
   }
 });
 

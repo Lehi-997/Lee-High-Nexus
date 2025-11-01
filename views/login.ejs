@@ -28,6 +28,14 @@
           <form id="loginForm" action="/login" method="POST">
             <input type="email" name="email" placeholder="Email Address" required />
             <input type="password" name="password" placeholder="Password" required />
+
+            <!-- Forgot Password Link -->
+            <p style="text-align:right; margin-top:5px; margin-bottom:10px;">
+              <a href="/forgot-password" style="color:#007bff; text-decoration:none; font-size:0.9em;">
+                Forgot Password?
+              </a>
+            </p>
+
             <!-- include next as hidden input -->
             <input type="hidden" name="next" value="<%= next || '/projects' %>">
             <button type="submit">Login</button>
