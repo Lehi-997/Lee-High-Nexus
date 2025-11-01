@@ -4,32 +4,33 @@ const router = express.Router();
 const crypto = require('crypto');
 const User = require('../models/User');
 const nodemailer = require('nodemailer');
+const brevoTransport = require('nodemailer-brevo-transport');
 
 /* ---------- ENV VARIABLES ---------- */
 const {
-  SMTP_HOST,
-  SMTP_PORT,
-  SMTP_USER,
-  SMTP_PASS,
-  EMAIL_FROM,
+  BREVO_API_KEY,
+  SENDER_EMAIL,
   BASE_URL,
   ADMIN_EMAIL
 } = process.env;
 
-/* ---------- EMAIL TRANSPORT ---------- */
-const transporter = nodemailer.createTransport({
-  host: SMTP_HOST,
-  port: parseInt(SMTP_PORT || 587, 10),
-  secure: SMTP_PORT == 465,
-  auth: { user: SMTP_USER, pass: SMTP_PASS },
-  tls: { rejectUnauthorized: false }
-});
+/* ---------- EMAIL TRANSPORT (BREVO) ---------- */
+const transporter = nodemailer.createTransport(
+  brevoTransport({
+    apiKey: BREVO_API_KEY
+  })
+);
 
 /* ---------- SEND EMAIL UTILITY ---------- */
 async function sendEmail(to, subject, html) {
   try {
-    await transporter.sendMail({ from: EMAIL_FROM, to, subject, html });
-    console.log(`📧 Email sent to ${to} (${subject})`);
+    await transporter.sendMail({
+      from: SENDER_EMAIL,
+      to,
+      subject,
+      html
+    });
+    console.log(`📧 Email sent successfully to ${to} (${subject})`);
   } catch (err) {
     console.error(`❌ Failed to send email to ${to}:`, err.message);
   }
@@ -172,7 +173,7 @@ router.get('/verify-email', async (req, res) => {
   }
 });
 
-/* ---------- NEW: RESEND VERIFICATION EMAIL ---------- */
+/* ---------- RESEND VERIFICATION ---------- */
 router.post('/resend-verification', async (req, res) => {
   try {
     const { email } = req.body;
@@ -411,3 +412,4 @@ router.post('/reset-password/:token', async (req, res) => {
 });
 
 module.exports = router;
+
