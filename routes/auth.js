@@ -20,7 +20,7 @@ const {
 const transporter = nodemailer.createTransport({
   host: SMTP_HOST,
   port: parseInt(SMTP_PORT || 587, 10),
-  secure: false, // Always false for Gmail port 587 (STARTTLS)
+  secure: SMTP_PORT == 465,
   auth: { user: SMTP_USER, pass: SMTP_PASS },
   tls: { rejectUnauthorized: false }
 });
@@ -28,10 +28,10 @@ const transporter = nodemailer.createTransport({
 /* ---------- SEND EMAIL UTILITY ---------- */
 async function sendEmail(to, subject, html) {
   try {
-    await transporter.sendMail({ from: EMAIL_FROM || `"Lee High Nexus" <${SMTP_USER}>`, to, subject, html });
+    await transporter.sendMail({ from: EMAIL_FROM, to, subject, html });
     console.log(`📧 Email sent to ${to} (${subject})`);
   } catch (err) {
-    console.error(`❌ Failed to send email to ${to}:`, err);
+    console.error(`❌ Failed to send email to ${to}:`, err.message);
   }
 }
 
@@ -52,7 +52,6 @@ async function sendVerificationEmail(user, req) {
       </p>
       <p>This link expires in 15 minutes.</p>
     </div>`;
-
   await sendEmail(user.email, 'Verify your Lee High Nexus account', html);
 }
 
@@ -259,17 +258,6 @@ router.get('/check-verification', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
-  }
-});
-
-/* ---------- TEST EMAIL (TEMPORARY) ---------- */
-router.get('/test-email', async (req, res) => {
-  try {
-    await sendEmail('yourtestemail@gmail.com', 'Lee High Nexus Test', '<h2>This is a test email from Lee High Nexus ✅</h2>');
-    res.send('✅ Email sent successfully! Check your inbox.');
-  } catch (err) {
-    console.error('❌ Test email failed:', err);
-    res.status(500).send('❌ Email failed: ' + err.message);
   }
 });
 
