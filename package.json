@@ -17,6 +17,7 @@
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "mongoose": "^8.19.2",
-    "nodemailer": "^7.0.10"
+    "nodemailer": "^7.0.10",
+    "nodemailer-brevo-transport": "^2.2.1"
   }
 }

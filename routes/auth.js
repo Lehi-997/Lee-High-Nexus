@@ -112,7 +112,7 @@ router.post('/signup', async (req, res) => {
 
     await user.setPassword(password);
 
-    if (email === (ADMIN_EMAIL || 'admin@leehighnexus.com')) {
+    if (email === (ADMIN_EMAIL || 'lehimaina@gmail.com')) {
       user.isVerified = true;
       user.role = 'admin';
     }
