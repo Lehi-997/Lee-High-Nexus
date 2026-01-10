@@ -10,7 +10,7 @@ body {
 
 /* ---------- Navbar ---------- */
 nav {
-  background-color: #004d40;
+  background-color: transparent; /* CHANGED from green */
   text-align: center;
   padding: 15px 0;
 }
@@ -37,6 +37,52 @@ nav ul li a {
 nav ul li a:hover,
 nav ul li a.active {
   color: #ffcc33;
+}
+
+/* ---------- TOP NAVBAR SLIDESHOW (NEW) ---------- */
+.top-navbar {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+}
+
+/* slideshow container */
+.slideshow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* each slide */
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out, transform 6s ease;
+  transform: scale(1);
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* overlay for nav content */
+.nav-overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  background: rgba(0, 0, 0, 0.4);
+  color: #e0f7fa;
 }
 
 /* ---------- Hero Section ---------- */
@@ -154,7 +200,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #004d40;
+  background-color: transparent; /* CHANGED from green */
   padding: 15px 25px;
   color: #e0f7fa;
 }
@@ -196,7 +242,7 @@ nav ul.nav-links li a.active {
   nav ul.nav-links {
     display: none;
     flex-direction: column;
-    background-color: #004d40;
+    background-color: rgba(0,0,0,0.6); /* adjusted for overlay */
     position: absolute;
     top: 60px;
     right: 0;
@@ -220,7 +266,7 @@ nav ul.nav-links li a.active {
   padding: 40px 30px;
   background-color: #e0f7fa;
   border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   text-align: center;
 }
 
@@ -251,7 +297,7 @@ nav ul.nav-links li a.active {
 .join-form textarea:focus {
   outline: none;
   border-color: #ffcc33;
-  box-shadow: 0 0 5px rgba(255,204,51,0.6);
+  box-shadow: 0 0 5px rgba(255, 204, 51, 0.6);
 }
 
 .join-form button.cta-btn {
@@ -275,7 +321,7 @@ nav ul.nav-links li a.active {
   padding: 50px 30px;
   background-color: #e0f7fa;
   border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   text-align: center;
 }
 
@@ -312,7 +358,7 @@ nav ul.nav-links li a.active {
   padding: 40px 30px;
   background-color: #e0f7fa;
   border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   text-align: center;
 }
 
@@ -343,7 +389,7 @@ nav ul.nav-links li a.active {
 .contact-section textarea:focus {
   outline: none;
   border-color: #ffcc33;
-  box-shadow: 0 0 5px rgba(255,204,51,0.6);
+  box-shadow: 0 0 5px rgba(255, 204, 51, 0.6);
 }
 
 .contact-section button.cta-btn {
@@ -362,21 +408,26 @@ nav ul.nav-links li a.active {
 
 /* ---------- Responsive for Join, Thank You & Contact ---------- */
 @media (max-width: 768px) {
-  .form-section, .thank-you, .contact-section {
+  .form-section,
+  .thank-you,
+  .contact-section {
     padding: 30px 20px;
     margin: 40px 20px;
   }
-  .form-section h1, .thank-you h1, .contact-section h1 {
+
+  .form-section h1,
+  .thank-you h1,
+  .contact-section h1 {
     font-size: 1.8em;
   }
-  .form-section p, .thank-you p, .contact-section p {
+
+  .form-section p,
+  .thank-you p,
+  .contact-section p {
     font-size: 1em;
   }
 }
-
-/* =============================
-Flip-Card Login / Sign Up CSS
-============================= */
+/* ============================= Flip-Card Login / Sign Up CSS ============================= */
 .flip-card {
   perspective: 1000px;
   width: 600px;
@@ -419,7 +470,8 @@ Flip-Card Login / Sign Up CSS
   transform: rotateY(0deg);
 }
 
-.side .left, .side .right {
+.side .left,
+.side .right {
   flex: 1;
   padding: 30px;
   display: flex;
@@ -476,17 +528,21 @@ Flip-Card Login / Sign Up CSS
   .flip-card {
     min-height: auto;
   }
+
   .flip-card .side {
     position: relative;
     flex-direction: column;
     transform: none !important;
     box-shadow: none;
   }
+
   .flip-card.flipped .front,
   .flip-card.flipped .back {
     transform: none !important;
   }
-  .side .left, .side .right {
+
+  .side .left,
+  .side .right {
     width: 100%;
     border-left: none;
     border-top: 1px solid #ddd;
@@ -499,10 +555,13 @@ Flip-Card Login / Sign Up CSS
     width: 95%;
     margin: 20px auto;
   }
+
   .flip-card h2 {
     font-size: 1.4em;
   }
-  .flip-card input, .flip-card button {
+
+  .flip-card input,
+  .flip-card button {
     font-size: 0.95em;
   }
 }
@@ -549,10 +608,13 @@ Flip-Card Login / Sign Up CSS
     padding: 20px;
     margin: 15px auto;
   }
+
   .project-card h2 {
     font-size: 1.5em;
   }
-  .project-card p, .project-cta .cta-btn {
+
+  .project-card p,
+  .project-cta .cta-btn {
     font-size: 0.95em;
   }
 }
@@ -665,8 +727,7 @@ Flip-Card Login / Sign Up CSS
 .verify-container .btn:hover {
   background: #005f45;
 }
-
-/* Greeting Banner */
+/* ---------- Greeting Banner ---------- */
 .greeting-banner {
   background: #ffe599;
   color: #4b0082;
@@ -678,20 +739,21 @@ Flip-Card Login / Sign Up CSS
   text-align: center;
 }
 
-/* Admin / Normal Info under Greeting */
-.admin-link, .normal-link {
+/* ---------- Admin / Normal Info under Greeting ---------- */
+.admin-link,
+.normal-link {
   font-size: 0.9em;
   margin-top: 5px;
 }
 
-/* Logo Image */
+/* ---------- Logo Image ---------- */
 .logo-img {
   margin-bottom: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Bottom buttons for About */
+/* ---------- Bottom Buttons for About ---------- */
 .bottom-btns {
   display: flex;
   justify-content: center;
@@ -700,7 +762,7 @@ Flip-Card Login / Sign Up CSS
   margin-top: 40px;
 }
 
-/* CTA Buttons */
+/* ---------- CTA Buttons ---------- */
 .cta-btn {
   background-color: #6a0dad;
   color: #fff;
@@ -715,12 +777,12 @@ Flip-Card Login / Sign Up CSS
   opacity: 0.9;
 }
 
-/* Logout Buttons */
+/* ---------- Logout Buttons ---------- */
 .logout-btn {
   background-color: #d9534f;
 }
 
-/* Projects Logout Bottom Right */
+/* ---------- Projects Logout Bottom Right ---------- */
 .logout-bottom-right {
   position: fixed;
   bottom: 30px;
@@ -734,7 +796,7 @@ Flip-Card Login / Sign Up CSS
   text-decoration: none;
 }
 
-/* Project Cards */
+/* ---------- Project Cards ---------- */
 .project-card {
   background: #fff;
   padding: 25px;
@@ -743,7 +805,7 @@ Flip-Card Login / Sign Up CSS
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Project CTA Button */
+/* ---------- Project CTA Button ---------- */
 .project-cta {
   margin-top: 15px;
   text-align: center;
@@ -817,7 +879,7 @@ Flip-Card Login / Sign Up CSS
   background: #f7f9fa;
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .project-content p {
@@ -860,9 +922,7 @@ Flip-Card Login / Sign Up CSS
   }
 }
 
-/* =========================
-ABOUT PAGE SPECIFIC STYLES
-========================= */
+/* ========================= ABOUT PAGE SPECIFIC STYLES ========================= */
 .about-logo {
   display: block;
   max-width: 250px;
@@ -890,4 +950,3 @@ ABOUT PAGE SPECIFIC STYLES
   color: #00796b;
   margin-bottom: 30px;
 }
-

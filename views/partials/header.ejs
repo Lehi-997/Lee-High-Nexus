@@ -9,22 +9,39 @@
   <script src="/js/script.js" defer></script>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <a href="/" style="text-decoration:none; color:#ffcc33; font-weight:bold; font-size:1.5em;">Lee High Nexus</a>
+
+  <!-- ===== TOP NAVBAR WITH SLIDESHOW ===== -->
+  <header class="top-navbar">
+
+    <!-- Slideshow Background -->
+    <div class="slideshow">
+      <img src="/images/slide1.jpg" class="slide active">
+      <img src="/images/slide2.jpg" class="slide">
+      <img src="/images/slide3.jpg" class="slide">
     </div>
-    <nav id="navbar">
-      <ul class="nav-links">
-        <li><a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a></li>
-        <li><a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About</a></li>
-        <li><a href="/projects" class="<%= page === 'projects' ? 'active' : '' %>">Projects</a></li>
-        <li><a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a></li>
-      </ul>
 
-      <!-- Removed auth buttons from header -->
+    <!-- Overlay Content -->
+    <div class="nav-overlay">
 
-      <div class="menu-toggle" id="menu-toggle">
-        ☰
+      <div class="logo">
+        <a href="/" style="text-decoration:none; color:#ffcc33; font-weight:bold; font-size:1.5em;">
+          Lee High Nexus
+        </a>
       </div>
-    </nav>
+
+      <nav id="navbar">
+        <ul class="nav-links">
+          <li><a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a></li>
+          <li><a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About</a></li>
+          <li><a href="/projects" class="<%= page === 'projects' ? 'active' : '' %>">Projects</a></li>
+          <li><a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a></li>
+        </ul>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="menu-toggle" id="menu-toggle">
+          ☰
+        </div>
+      </nav>
+
+    </div>
   </header>

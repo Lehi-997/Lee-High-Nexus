@@ -1,17 +1,49 @@
+// ===============================
 // Mobile Navbar Toggle
+// ===============================
 const menuToggle = document.getElementById('menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
-menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('show');
-});
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+}
 
-// -------- Flip-Card Login/Sign Up --------
+// ===============================
+// TOP NAVBAR SLIDESHOW
+// ===============================
+const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('active');
+    if (i === index) {
+      slide.classList.add('active');
+    }
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+// Start slideshow only if slides exist
+if (slides.length > 0) {
+  showSlide(currentSlide);
+  setInterval(nextSlide, 5000); // change image every 5 seconds
+}
+
+// ===============================
+// Flip-Card Login/Sign Up
+// ===============================
 const flipCard = document.getElementById('flipCard');
 const showSignupBtn = document.getElementById('showSignup');
 const showLoginBtn = document.getElementById('showLogin');
 
-if (flipCard) { // Ensure flipCard exists on the page
+if (flipCard) {
   // Function to flip to signup
   function flipToSignup() {
     flipCard.classList.add('flipped');
