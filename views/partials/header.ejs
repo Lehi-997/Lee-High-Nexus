@@ -1,47 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/projects.css">
-  <script src="/js/script.js" defer></script>
-</head>
-<body>
+<!-- ===== TOP NAVBAR WITH AUTO-SLIDESHOW ===== -->
+<header class="top-navbar">
 
-  <!-- ===== TOP NAVBAR WITH SLIDESHOW ===== -->
-  <header class="top-navbar">
+  <!-- Slideshow Background -->
+  <div class="slideshow-container">
+    <div class="slideshow-slide slide-1"></div>
+    <div class="slideshow-slide slide-2"></div>
+    <div class="slideshow-slide slide-3"></div>
+  </div>
 
-    <!-- Slideshow Background -->
-    <div class="slideshow">
-      <img src="/images/slide1.jpg" class="slide active">
-      <img src="/images/slide2.jpg" class="slide">
-      <img src="/images/slide3.jpg" class="slide">
+  <!-- Dark overlay for text readability -->
+  <div class="navbar-overlay"></div>
+
+  <!-- Main navbar content (logo + links + toggle) -->
+  <div class="nav-content">
+
+    <div class="logo">
+      <a href="/" style="text-decoration:none; color:#ffcc33; font-weight:bold; font-size:1.5em;">
+        Lee High Nexus
+      </a>
     </div>
 
-    <!-- Overlay Content -->
-    <div class="nav-overlay">
+    <nav id="navbar">
+      <ul class="nav-links">
+        <li><a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a></li>
+        <li><a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About</a></li>
+        <li><a href="/projects" class="<%= page === 'projects' ? 'active' : '' %>">Projects</a></li>
+        <li><a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a></li>
+      </ul>
 
-      <div class="logo">
-        <a href="/" style="text-decoration:none; color:#ffcc33; font-weight:bold; font-size:1.5em;">
-          Lee High Nexus
-        </a>
+      <!-- Mobile Menu Toggle -->
+      <div class="menu-toggle" id="menu-toggle">
+        ☰
       </div>
+    </nav>
 
-      <nav id="navbar">
-        <ul class="nav-links">
-          <li><a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a></li>
-          <li><a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About</a></li>
-          <li><a href="/projects" class="<%= page === 'projects' ? 'active' : '' %>">Projects</a></li>
-          <li><a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a></li>
-        </ul>
+  </div>
 
-        <!-- Mobile Menu Toggle -->
-        <div class="menu-toggle" id="menu-toggle">
-          ☰
-        </div>
-      </nav>
-
-    </div>
-  </header>
+</header>

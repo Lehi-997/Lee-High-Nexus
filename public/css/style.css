@@ -914,3 +914,104 @@ nav ul.nav-links li a.active {
     color: #00796b;
     margin-bottom: 30px;
 }
+
+/* ──────────────────────────────────────────────
+   FULL-WIDTH HEADER SLIDESHOW (global navbar area)
+   ────────────────────────────────────────────── */
+
+.top-navbar {
+    position: relative;
+    height: 420px;                    /* Adjust this height to your preference */
+    min-height: 320px;
+    overflow: hidden;
+    background-color: #004d40;        /* fallback if images fail */
+}
+
+.slideshow-container {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.slideshow-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+
+/* Auto-fade animation using keyframes */
+.slideshow-slide.slide-1 {
+    background-image: url("/images/slide1.jpg");
+    animation: slideshow 18s infinite;
+}
+.slideshow-slide.slide-2 {
+    background-image: url("/images/slide2.jpg");
+    animation: slideshow 18s infinite 6s;
+}
+.slideshow-slide.slide-3 {
+    background-image: url("/images/slide3.jpg");
+    animation: slideshow 18s infinite 12s;
+}
+
+@keyframes slideshow {
+    0%    { opacity: 0; }
+    8%    { opacity: 1; }
+    25%   { opacity: 1; }
+    33%   { opacity: 0; }
+    100%  { opacity: 0; }
+}
+
+/* Dark overlay improves text contrast */
+.navbar-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 77, 64, 0.55);   /* semi-transparent teal/dark */
+    z-index: 2;
+}
+
+/* Navbar content lives above overlay */
+.nav-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    color: #e0f7fa;
+}
+
+/* Make sure links and logo are visible */
+.nav-content a,
+.nav-content .logo a {
+    color: #ffcc33 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7); /* subtle shadow for contrast */
+}
+
+.nav-links li a {
+    color: #e0f7fa !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: #ffcc33 !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .top-navbar {
+        height: 280px;
+        min-height: 220px;
+    }
+
+    .nav-content {
+        padding: 15px 20px;
+    }
+
+    .logo a {
+        font-size: 1.3em;
+    }
+}
